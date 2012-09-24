@@ -11,8 +11,10 @@ class Migration(SchemaMigration):
         # Adding model 'Chunk'
         db.create_table('chunks_chunk', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('key', self.gf('django.db.models.fields.CharField')(unique=True, max_length=255)),
+            ('key', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('content', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('description', self.gf('django.db.models.fields.CharField')(max_length=64, blank=True)),
+            ('lang_code', self.gf('django.db.models.fields.CharField')(default='is', max_length=5, blank=True)),
         ))
         db.send_create_signal('chunks', ['Chunk'])
 
@@ -27,8 +29,10 @@ class Migration(SchemaMigration):
         'chunks.chunk': {
             'Meta': {'object_name': 'Chunk'},
             'content': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'description': ('django.db.models.fields.CharField', [], {'max_length': '64', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'key': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'})
+            'key': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'lang_code': ('django.db.models.fields.CharField', [], {'default': "'is'", 'max_length': '5', 'blank': 'True'})
         }
     }
 
